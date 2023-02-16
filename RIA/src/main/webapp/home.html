@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="js/home.js" charset="UTF-8" defer></script>
+<script type="text/javascript" src="js/AJAX.js" charset="UTF-8" defer></script>
+<link rel="stylesheet" type="text/css" href="css/tree.css" />
+<title>Homepage</title>
+</head>
+<body>
+	<h1>Welcome to a RIA file-tree web application.</h1>
+	<h2>
+		<span>You are currently logged as </span>
+		<span style="color: grey;" id="user"></span>
+	</h2>
+	
+	<table style="table-layout: fixed; width: 100%;">
+		<thead>
+			<tr>
+				<td id="tree-container" style="width: 20%;">
+					<div id="tree"></div>
+
+					<span id="no-folders" style="display: none;">No folders have been created yet...</span>
+					<input id="parent-creation" type="button" value="Create folder" style="font-size: 10px;">
+					
+					<br>
+					<br>
+					
+					<span id="recycle-bin" draggable="true" style="color: red;">Recycle bin</span>
+				</td>
+				<td id="form-container" style="visibility: hidden; width: 25%; border: 1px solid black; border-radius: 30px;">
+					<div style="width: 75%; margin: auto;">
+						<h3>
+							<span>You are creating a </span>
+							<div id="entity-creation" style="display: none;">
+								<span id="entity">?</span><br>
+								<span> within </span>
+								<span id="target-entity" style="color: grey;">?</span>
+								<span> entity</span>
+							</div>
+							<div id="root-creation" style="display: none;">
+								<span>folder within the file-tree hierarchy</span>
+							</div>
+						</h3>
+					</div>
+					<div id="form" style="visibility: hidden; width: 75%; margin: auto;">
+						<form>
+							Name: <input type="text" name="name" required><br>
+							Type: <input type="text" name="type" required><br>
+							Summary: <input type="text" name="summary"><br>
+							<input type="button" value="Create">
+						</form>
+					</div>
+				</td>
+				<td id="detail-container" style="visibility: hidden; border: 1px solid black;">
+					<div id="detail" style="width: 80%; margin: auto;">
+						<h2>
+							<span>You are visualizing </span>
+							<span id="title-document" style="color: grey;">file.ext</span>
+							<span> document in </span>
+							<span id="title-subfolder" style="color: grey;">?</span>
+							<span> subfolder</span>
+						</h2>
+	
+						<p><em>Name: </em><span id="detail-name">?</span></p>
+						<p><em>Type: </em><span id="detail-type">?</span></p>
+						<p><em>Owner: </em><span id="detail-owner">?</span></p>
+						<p><em>Creation date: </em><span id="detail-date">?</span></p>
+						<div id="summary">
+							<p><em>Summary: </em><span id="detail-summary">?</span></p>
+						</div>
+						<p id="no-summary" style="display: none;">The document does not have a summary.</p>
+					</div>
+				</td>
+			</tr>
+		</thead>
+	</table>
+	
+	<br>
+	
+	<a href="logout">Logout</a>
+</body>
+</html>

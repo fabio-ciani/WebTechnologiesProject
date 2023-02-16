@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Subfolder visualizer</title>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+	<h1 style="color: blue;">Document visualizer functionality</h1>
+	
+	<h2>
+		<span>You are currently visualizing the documents belonging to </span>
+		<span style="color: grey;" th:text="${subfolder.getName()}"></span>
+		<span> subfolder</span>
+	</h2>
+
+	<div th:if="${documents.size() > 0}">
+		<table>
+			<thead>
+				<tr>
+					<th>Document</th>
+					<th>Summary</th>
+					<th>Access operation link</th>
+					<th>Move operation link</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="d : ${documents}">
+					<td th:text="${d.getName() + '.' + d.getType()}"></td>
+					<td th:text="${d.getSummary()}"></td>
+					<td><a th:href="@{/detail(subfolder=${subfolder.getID()}, document=${d.getID()})}">Access</a></td>
+					<div th:if="${subfoldersCount == 1}">
+						<td>No other subfolders exist.</td>
+					</div>
+					<div th:unless="${subfoldersCount == 1}">
+						<td><a th:href="@{/move(subfolder=${subfolder.getID()}, document=${d.getID()})}">Move</a></td>
+					</div>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<p th:if="${documents.size() == 0}">No documents within the selected subfolder have been created yet...</p>
+	<p th:if="${moveError}" style="color: red;">Document already exists in destination subfolder</p>
+	
+	<br>
+	<br>
+
+	<a th:href="@{/home}">Previous page</a><br>
+	<a th:href="@{/logout}">Logout</a>
+</body>
+</html>

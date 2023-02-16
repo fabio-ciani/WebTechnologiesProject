@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Content management</title>
+</head>
+<body>
+	<h1 style="color: blue;">Content management functionality</h1>
+
+	<h3>Create a folder</h3>
+	<form action="FolderCreation" method="POST">
+		Name: <input type="text" name="name" required><br>
+		<p th:if="${folderNameError}" style="color: red;">Folder already exists</p>
+		<p th:if="${folderLengthError}" style="color: red;">Too long value</p>
+		<input type="submit" value="Create">
+	</form>
+
+	<br>
+	<br>
+
+	<h3>Create a subfolder</h3>
+	<div th:if="${folders.size() > 0}">
+		<form action="SubfolderCreation" method="POST">
+			Name: <input type="text" name="name" required><br>
+			<p th:if="${subfolderNameError}" style="color: red;">Subfolder already exists within parent folder</p>
+			<p th:if="${subfolderLengthError}" style="color: red;">Too long value</p>
+			Parent folder:
+			<select name="parent_folder" required>
+				<option th:each="f : ${folders}" th:value="${f.getID()}" th:text="${f.getName()}"></option>
+			</select><br><br>
+			<input type="submit" value="Create">
+		</form>
+
+		<br> <br>
+
+		<h3>Create a document</h3>
+		<div th:if="${subfoldersSize > 0}">
+			<form action="DocumentCreation" method="POST">
+				Name: <input type="text" name="name" required>
+				<p th:if="${documentNameError}" style="color: red;">Too long value</p><br>
+				Type: <input type="text" name="type" required>
+				<p th:if="${documentTypeError}" style="color: red;">Too long value</p><br>
+				Summary: <input type="text" name="summary">
+				<p th:if="${documentSummaryError}" style="color: red;">Too long value</p><br>
+				Subfolder:
+				<select name="subfolder" required>
+					<optgroup th:each="f : ${folders}" th:label="${f.getName()}">
+						<option th:each="s : ${subfolders.get(f.getID())}" th:value="${s.getID()}" th:text="${s.getName()}"></option>
+					</optgroup>
+				</select><br>
+				<p th:if="${duplicatedDocumentError}" style="color: red;">Document already exists within parent subfolder</p>
+				<input type="submit" value="Create">
+			</form>
+		</div>
+		<p th:if="${subfoldersSize == 0}">No subfolders have been created yet...</p>
+	</div>
+	<p th:if="${folders.size() == 0}">No folders have been created yet...</p>
+
+	<br>
+	<br>
+
+	<a th:href="@{/home}">Previous page</a><br>
+	<a th:href="@{/logout}">Logout</a>
+</body>
+</html>

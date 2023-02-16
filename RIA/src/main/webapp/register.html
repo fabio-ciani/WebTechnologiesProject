@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="js/register.js" charset="UTF-8" defer></script>
+<script type="text/javascript" src="js/regex.js" charset="UTF-8" defer></script>
+<script type="text/javascript" src="js/AJAX.js" charset="UTF-8" defer></script>
+<title>Register</title>
+</head>
+<body>
+	<h2>Register to the application.</h2>
+	
+	<p>Your password can contain any letter, digit and special character from the following list:
+		<ul>
+			<li>period (.)</li>
+			<li>hyphen (-)</li>
+			<li>exclamation mark (!)</li>
+			<li>dollar sign ($)</li>
+			<li>percent sign (%)</li>
+			<li>ampersand (&)</li>
+			<li>question mark (?)</li>
+			<li>hashtag (#)</li>
+			<li>commercial at sign (@)</li>
+		</ul>
+	</p>
+
+	<br>
+	
+	<p>
+		The name, surname and email fields cannot be empty.
+		The bound for name and surname is 32 characters in length, while email is bounded to 128 characters.<br><br>
+		The password is limited to a minimum of 4 characters.
+	</p>
+	
+	<br>
+	<br>
+	
+	<form id="form">
+		Name: <input id="name" type="text" name="name" required>
+		<p id="nameError" style="color: red;"></p><br>
+		Surname: <input id="surname" type="text" name="surname" required>
+		<p id="surnameError" style="color: red;"></p><br>
+		Email: <input id="email" type="text" name="email" required>
+		<p id="emailError" style="color: red;"></p>
+		<p id="emailFormatError" style="color: red;"></p><br>
+		Password: <input id="pwd" type="password" name="pwd" minlength="4" required>
+		<p id="pwdError" style="color: red;"></p>
+		<p id="pwdFormatError" style="color: red;"></p><br>
+		Repeat password: <input id="repeat" type="password" name="repeat" minlength="4" required>
+		<p id="repeatError" style="color: red;"></p><br>
+		<input id="registerBtn" type="button" value="Register">
+	</form>
+
+	<br>
+	<br>
+
+	<a id="loginAnchor" href="login">Already have an account?</a>
+</body>
+</html>

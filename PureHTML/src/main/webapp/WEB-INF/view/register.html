@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Register</title>
+</head>
+<body>
+	<h2>Register to the application.</h2>
+
+	<p>
+		Your username must begin and end with a letter or digit.<br>
+		The application allows choosing to use the period character
+		or the hyphen character to create your username.<br>
+		If you choose one of the aforementioned characters,
+		then you have to continue to use it, and cannot use the other character.<br>
+	</p>
+
+	<p>Your password can contain any letter, digit and special character from the following list:
+		<ul>
+			<li>period (.)</li>
+			<li>hyphen (-)</li>
+			<li>exclamation mark (!)</li>
+			<li>dollar sign ($)</li>
+			<li>percent sign (%)</li>
+			<li>ampersand (&)</li>
+			<li>question mark (?)</li>
+			<li>hashtag (#)</li>
+			<li>commercial at sign (@)</li>
+		</ul>
+	</p>
+
+	<br>
+	
+	<p>
+		The name, surname and username fields cannot be empty and are bounded to a maximum of 32 characters.<br>
+		The password is limited to a minimum of 4 characters.
+	</p>
+	
+	<br>
+	<br>
+	
+	<form action="register" method="POST">
+		Name: <input type="text" name="name" required>
+		<p th:text="${nameError}" style="color: red;"></p><br>
+		Surname: <input type="text" name="surname" required>
+		<p th:text="${surnameError}" style="color: red;"></p><br>
+		Username: <input type="text" name="username" required>
+		<p th:text="${usernameError}" style="color: red;"></p>
+		<p th:text="${usernameFormatError}" style="color: red;"></p>
+		<p th:text="${usernameNotAvailable}" style="color: red;"></p><br>
+		Password: <input type="password" name="pwd" minlength="4" required>
+		<p th:text="${pwdError}" style="color: red;"></p>
+		<p th:text="${pwdFormatError}" style="color: red;"></p><br>
+		<input type="submit" value="Register">
+	</form>
+
+	<br>
+	<br>
+	
+	<a th:href="@{/login}">Already have an account?</a>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Homepage</title>
+</head>
+<body>
+	<div th:if="${!requireMove}">
+		<h1>Welcome to a pure HTML file-tree web application.</h1>
+		<h2>
+			<span>You are currently logged as </span>
+			<span style="color: grey;" th:text="${session.user.getName() + ' ' + session.user.getSurname()}"></span>
+		</h2>
+	</div>
+	
+	<div th:if="${requireMove}">
+		<h1 style="color: blue;">Document mover functionality</h1>
+		<h3>
+			<span>You are moving the document </span>
+			<span style="color: grey;" th:text="${document.getName() + '.' + document.getType()}"></span>
+			<span th:text="${' from the subfolder ' + sourceFolder.getName() + '.'}"></span>
+		</h3>
+		<h4>Please, choose the destination subfolder.</h4>
+	</div>
+
+	<div th:if="${folders.size() > 0}">
+		<ul>
+			<li th:each="f : ${folders}" th:value="${f.getID()}">
+				<span th:text="${f.getName()}"></span>
+				<ul>
+					<div th:if="${!requireMove}">
+						<li th:each="s : ${subfolders.get(f.getID())}"><a th:href="@{/documents(subfolder=${s.getID()})}" th:text="${s.getName()}"></a></li>
+					</div>
+					<div th:unless="${!requireMove}">
+						<li th:each="s : ${subfolders.get(f.getID())}">
+							<div th:if="${s.getID() != sourceFolder.getID()}">
+								<a th:href="@{/ApplyMove(source=${sourceFolder.getID()}, destination=${s.getID()}, document=${document.getID()})}" th:text="${s.getName()}"></a>
+							</div>
+							<div th:unless="${s.getID() != sourceFolder.getID()}">
+								<span style="color: green;" th:text="${s.getName()}"></span>
+							</div>
+						</li>
+					</div>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<p th:if="${folders.size() == 0}">No folders have been created yet...</p><br>
+	<p th:if="${folders.size() > 0 && subfoldersSize == 0}">No subfolders have been created yet...</p>
+	
+	<br>
+	
+	<div th:if="${!requireMove}">
+		<a th:href="@{/manager}">Content management</a><br>
+	</div>
+	<div th:unless="${!requireMove}">
+		<a th:href="@{/documents(subfolder=${sourceFolder.getID()})}">Cancel operation</a><br>
+	</div>
+	<a th:href="@{/logout}">Logout</a>
+</body>
+</html>

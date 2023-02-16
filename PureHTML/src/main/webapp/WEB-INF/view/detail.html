@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Document detail</title>
+</head>
+<body>
+	<h1 style="color: blue;">Document detail functionality</h1>
+	
+	<h2>
+		<span>You are currently visualizing </span>
+		<span style="color: grey;" th:text="${document.getName() + '.' + document.getType()}"></span>
+		<span> document in </span>
+		<span style="color: grey;" th:text="${parent}"></span>
+		<span> subfolder</span>
+	</h2>
+	
+	<p><em>Name: </em><span th:text="${document.getName()}"></span></p>
+	<p><em>Type: </em><span th:text="${'*.' + document.getType()}"></span></p>
+	<p><em>Owner: </em><span th:text="${document.getOwner()}"></span></p>
+	<p><em>Creation date: </em><span th:text="${document.getCreationDate()}"></span></p>
+	<div th:if="${document.getSummary().length() > 0}">
+		<p><em>Summary: </em><span th:text="${document.getSummary()}"></span></p>
+	</div>
+	<div th:unless="${document.getSummary().length() > 0}">
+		<p>The document does not have a summary.</p>
+	</div>
+	
+	<br>
+	<br>
+
+	<a th:href="@{/documents(subfolder=${subfolder})}">Previous page</a><br>
+	<a th:href="@{/logout}">Logout</a>
+</body>
+</html>
